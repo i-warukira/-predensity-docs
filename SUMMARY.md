@@ -1,0 +1,17 @@
+# Table of Contents
+
+* [Welcome](README.md)
+* [Whitepaper](whitepaper.md)
+  * [Abstract](whitepaper.md#abstract)
+  * [The Problem](whitepaper.md#the-problem-with-how-markets-work-today)
+  * [What Predensity Does Differently](whitepaper.md#what-predensity-does-differently)
+  * [How a Prediction Works](whitepaper.md#how-a-prediction-works)
+  * [Prediction Quality](whitepaper.md#what-makes-a-prediction-high-quality)
+  * [The Probability Map](whitepaper.md#the-probability-map)
+  * [No Early Exits](whitepaper.md#no-early-exits)
+  * [How Payouts Work](whitepaper.md#how-payouts-work)
+  * [Markets](whitepaper.md#markets)
+  * [The Platform](whitepaper.md#the-platform)
+  * [Why This Matters](whitepaper.md#why-this-matters)
+  * [Competitive Landscape](whitepaper.md#competitive-landscape)
+  * [Appendix: Technical Parameters](whitepaper.md#appendix-technical-parameters)
