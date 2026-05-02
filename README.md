@@ -1,8 +1,7 @@
-# Predensity
+# Abstract
 
-**Profit from bold, early, and accurate forecasts.**
+Predensity is a decentralized prediction market that rewards *precision* and *foresight* — not just correctness.
 
-Predensity is a decentralized prediction market where the *quality* of your prediction determines your reward — not just whether you were right.
+Traders pick a price range and a time horizon, stake USDC, and earn based on how hard their prediction was to make. Quality is scored on two dimensions: **sharpness** (how narrow the range) and **lead time** (how early the prediction). These combine into a weight that determines each winner's share of the payout pool.
 
-- **Live platform:** [predensity.com](https://www.predensity.com)
-- **Blog:** [predensity.substack.com](https://predensity.substack.com)
+The system starts with crypto price forecasting and expands to sports, politics, finance, and technology. The mechanics are the same across all categories: *predict a range, commit a stake, get rewarded for quality*.

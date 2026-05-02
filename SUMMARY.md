@@ -1,12 +1,11 @@
 # Table of Contents
 
-* [Welcome](README.md)
-* [Abstract](docs/abstract.md)
+* [Abstract](README.md)
 * [The Problem](docs/problem.md)
 * [The Solution](docs/solution.md)
 * [How a Prediction Works](docs/how-it-works.md)
 * [Prediction Quality](docs/prediction-quality.md)
-* [The Probability Map](docs/probability-map.md)
+* [The Prediction Chart](docs/probability-map.md)
 * [No Early Exits](docs/no-early-exits.md)
 * [Payouts](docs/payouts.md)
 * [Markets](docs/markets.md)
