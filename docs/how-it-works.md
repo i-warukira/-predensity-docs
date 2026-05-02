@@ -11,10 +11,10 @@ At time $$x$$, the oracle checks the actual price $$p$$:
 
 $$\text{Win} = \begin{cases} \text{true} & \text{if } y_1 \leq p \leq y_2 \\ \text{false} & \text{otherwise} \end{cases}$$
 
-If the bet wins, payout is calculated from the **Quality** score locked in at placement:
+If the bet wins, [payout](payouts.md) is calculated from the **[Quality](prediction-quality.md)** score locked in at placement:
 
 $$\text{Quality}_{bps} = \frac{Q_S \times Q_L}{10{,}000}$$
 
-The card shows a live breakdown of sharpness, lead time, combined quality, estimated fee, and estimated profit *before* you confirm the bet.
+The card shows a live breakdown of [sharpness, lead time](prediction-quality.md), combined quality, estimated fee, and estimated profit *before* you confirm the bet.
 
-> *The stake is locked until resolution. There are no early exits.*
+> *The stake is locked until resolution. [There are no early exits.](no-early-exits.md)*

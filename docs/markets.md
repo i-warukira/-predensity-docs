@@ -1,6 +1,6 @@
 # Markets
 
-The same prediction mechanics apply across all categories. Any outcome expressible as a *measurable range at a future timestamp* is a valid market.
+The same [prediction mechanics](how-it-works.md) apply across all categories. Any outcome expressible as a *measurable range at a future timestamp* is a valid market.
 
 | Category | What you predict |
 |---|---|
@@ -10,4 +10,4 @@ The same prediction mechanics apply across all categories. Any outcome expressib
 | **Finance** | Stock prices, commodities, economic indicators |
 | **Technology** | Valuations, IPO prices, growth metrics |
 
-Resolution is *automatic via oracle* — no human adjudication, no disputes.
+Resolution is *automatic via oracle* — no human adjudication, no disputes. [Quality scoring](prediction-quality.md) and [payouts](payouts.md) work identically across all categories.
