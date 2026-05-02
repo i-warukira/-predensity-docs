@@ -1,41 +1,47 @@
 # Payouts
 
-Payouts come from each token's **liquidity reserve** — funded entirely by losing stakes. No external subsidies. No inflation.
+Predensity uses a **parimutuel** model. All stakes in a resolution bucket go into a shared pool. Winners split that pool proportionally by weight.
 
-$$\text{Total Payout} = \text{Base Payout} + \text{Reserve Bonus}$$
+$$\text{Payout}_i = \frac{w_i}{\sum_{j \in \text{winners}} w_j} \times \text{Bucket Total Stake}$$
 
----
+Where $$w_i = \text{Stake}_{net,i} \times \text{Quality}_{bps,i}\ /\ 10{,}000$$
 
-## **Base Payout**
-
-$$\text{Base Payout} = \min\!\left(R_t,\ \text{Stake} \times (1 + \text{Prediction Quality})\right)$$
-
-$$R_t$$ = current reserve size (acts as a solvency cap).
-
-A 0.5% protocol fee is deducted at placement. This ensures even theoretically positive-EV bets are unprofitable if they carry no real information — *wide ranges that game the system are filtered out naturally*.
+*No fixed odds. No house edge beyond the protocol fee. The pool is entirely redistributed to winners.*
 
 ---
 
-## **Reserve Bonus**
+## **Example**
 
-Activated only when the reserve exceeds its target level $$R_{\text{target}}$$:
+Bucket total stake: **1,000 USDC**. Three winning bets:
 
-$$\text{Bonus Pool}_t = \begin{cases} \min(\text{EMA}_t,\ R_t - R_{\text{target}}) & \text{if } R_t > R_{\text{target}} \\ 0 & \text{otherwise} \end{cases}$$
+| Bet | Stake | Quality | Weight |
+|---|---|---|---|
+| A | 100 USDC | 2.0× | 200 |
+| B | 100 USDC | 1.0× | 100 |
+| C | 50 USDC | 4.0× | 200 |
 
-The EMA tracks recent losing stake inflows, smoothing volatility:
+Total winning weight = 500
 
-$$\text{EMA}_t = \alpha \cdot L_t + (1 - \alpha) \cdot \text{EMA}_{t-1}, \quad \alpha = 0.2$$
+| Bet | Payout |
+|---|---|
+| A | (200 / 500) × 1,000 = **400 USDC** |
+| B | (100 / 500) × 1,000 = **200 USDC** |
+| C | (200 / 500) × 1,000 = **400 USDC** |
 
-Each winning bet's share of the bonus pool, weighted by stake and recency:
-
-$$\text{BonusShare}_i = \frac{w_i}{\sum_j w_j}, \quad w_i = s_i \cdot e^{-\lambda(T - t_i)}, \quad \lambda = \tfrac{1}{48}$$
-
-*$$\lambda = 1/48$$ gives a 2-day half-life — recent winners capture more of the surplus.*
+Bet C staked half of A but matched A's payout — *because quality doubled its effective weight.*
 
 ---
 
-## **Reserve Management**
+## **No Winners**
 
-- Target level at launch: **$1M** per major token
-- Each token has an *isolated* reserve — no cross-token exposure
-- System continuously monitors reserve health and tunes $$S$$, weights, and decay rates to maintain stability
+If no bet in a bucket wins, the entire bucket stake is retained by the protocol.
+
+---
+
+## **Fee**
+
+A **1% fee** is deducted from the stake at placement:
+
+$$\text{Stake}_{net} = \text{Stake} \times 0.99$$
+
+Quality and weight are calculated on $$\text{Stake}_{net}$$.

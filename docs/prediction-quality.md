@@ -1,47 +1,31 @@
 # Prediction Quality
 
-Every bet is scored on three dimensions at placement. Scores are *locked in* — they do not change after the fact.
+Every bet is scored on two dimensions at placement. The score is *locked in* — it does not change after the fact.
 
-$$\text{Prediction Quality} = S \times Q_L^{w_L} \times Q_B^{w_B} \times Q_S^{w_S}$$
+$$\text{Quality}_{bps} = \frac{Q_S \times Q_L}{10{,}000}$$
 
-Initial weights: $$w_L = w_B = w_S = \tfrac{1}{3}$$. Scaling factor $$S = 1$$ at launch.
+$$\text{Weight} = \frac{\text{Stake}_{net} \times \text{Quality}_{bps}}{10{,}000}$$
 
-Exponential weighting means *no single dimension can compensate for weakness in another*. A great prediction must be sharp, bold, and early — all at once.
+Weight determines your share of the payout pool. Higher quality = larger share.
 
 ---
 
 ## **Sharpness** $$Q_S$$
 
-*How narrow is the predicted range relative to the current price?*
+*How narrow is the predicted range relative to the asset price?*
 
-$$Q_S = 1 - e^{-\frac{y_2 - y_1}{p_0 \cdot k}}, \quad k = 0.25$$
+$$\text{width}_{bps} = \frac{(y_2 - y_1) \times 10{,}000}{\bar{p}}, \quad \bar{p} = \frac{y_1 + y_2}{2}$$
 
-| Range / Price | $$Q_S$$ |
+| Range width | $$Q_S$$ multiplier |
 |---|---|
-| 5% | 0.993 |
-| 10% | 0.950 |
-| 25% | 0.630 |
-| 50% | 0.390 |
-| 100% | 0.220 |
+| > 40% | 0.1× |
+| 20 – 40% | 0.3× |
+| 10 – 20% | 0.5× |
+| 5 – 10% | 1.0× |
+| 2 – 5% | 1.5× |
+| < 2% | **2.0×** |
 
-A 5% window on a $3,400 token = $170 range. Hitting it is hard. The system pays accordingly.
-
----
-
-## **Boldness** $$Q_B$$
-
-*How far does the prediction deviate from current market consensus?*
-
-$$Q_B = 1 - \text{LocalConfidence}_{[y_1, y_2]}(x)$$
-
-Where local confidence is the share of probability mass the current market assigns to $$[y_1, y_2]$$ at time $$x$$:
-
-$$\text{LocalConfidence}(x) = \frac{\int_{y_1}^{y_2} P(x,y)\, dy}{\int_{-\infty}^{\infty} P(x,y)\, dy}$$
-
-$$P(x,y)$$ is the live probability surface built from all active bets (see [Probability Map](probability-map.md)).
-
-- Prediction follows the crowd → $$Q_B \approx 0$$
-- Prediction goes against the crowd → $$Q_B \approx 1$$
+*A sub-2% range on a $3,400 token = a $68 window. Hitting it earns the maximum sharpness multiplier.*
 
 ---
 
@@ -49,14 +33,24 @@ $$P(x,y)$$ is the live probability surface built from all active bets (see [Prob
 
 *How far in advance was the prediction placed?*
 
-$$Q_L = a \cdot t^{b}, \quad a = 17.78,\ b = 0.25$$
+Let $$\delta = t_{resolution} - t_{now}$$:
 
-Where $$t$$ is lead time in hours. Accepted range: $$t \in [1, 1000]$$.
-
-| Lead Time | $$Q_L$$ |
+| Lead time $$\delta$$ | $$Q_L$$ multiplier |
 |---|---|
-| 1 hour | 17.8 |
-| 1 day | 39.4 |
-| 3 days | 51.8 |
-| 1 week | 64.0 |
-| 1 month | 92.1 |
+| < 1 hour | 0.1× |
+| 1 – 2 hours | 0.1× |
+| 2 – 8 hours | 0.3× |
+| 8 hours – 1 day | 0.5× |
+| 1 – 2 days | 1.0× |
+| 2 – 4 days | 1.5× |
+| > 4 days | **2.0×** |
+
+---
+
+## **Combined Quality**
+
+$$\text{Quality}_{bps} = \frac{Q_S \times Q_L}{10{,}000}$$
+
+**Example:** Sharp range (2×) + 5-day lead time (2×) → Quality = 4× → Weight = 4 × Stake
+
+The multipliers are applied together — *a wide range cannot be rescued by an early placement, and a last-minute bet cannot be rescued by a tight range.*
