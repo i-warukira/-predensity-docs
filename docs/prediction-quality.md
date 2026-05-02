@@ -4,15 +4,23 @@ Every bet is scored on two dimensions at placement. The score is *locked in* —
 
 $$\text{Quality}_{bps} = \frac{Q_S \times Q_L}{10{,}000}$$
 
-$$\text{Weight} = \frac{\text{Stake}_{net} \times \text{Quality}_{bps}}{10{,}000}$$
+$$a_u = \text{stakeNet} \times \frac{\text{Quality}_{bps}}{10{,}000}$$
 
-Weight determines your share of the payout pool. Higher quality = larger share.
+$$a_u$$ is the bet's **kernel weight** — its influence on the [collective market density](probability-map.md) and its share of the [payout pool](payouts.md). Higher quality = larger $$a_u$$.
+
+Exponential weighting means *no single dimension can compensate for weakness in another*. A great prediction must be sharp and early — both at once.
 
 ---
 
 ## **Sharpness** $$Q_S$$
 
 *How narrow is the predicted range relative to the asset price?*
+
+The sharpness function is a discrete step approximation of the kernel decay:
+
+$$R(x_u, x) = \gamma^{|x_u - x| / \Delta}$$
+
+Where $$\gamma$$ is the decay factor and $$\Delta$$ is the scale parameter (what counts as one "unit" of error). On-chain, this is implemented as a step function on $$\text{width}_{bps}$$:
 
 $$\text{width}_{bps} = \frac{(y_2 - y_1) \times 10{,}000}{\bar{p}}, \quad \bar{p} = \frac{y_1 + y_2}{2}$$
 
@@ -25,7 +33,7 @@ $$\text{width}_{bps} = \frac{(y_2 - y_1) \times 10{,}000}{\bar{p}}, \quad \bar{p
 | 2 – 5% | 1.5× |
 | < 2% | **2.0×** |
 
-*A sub-2% range on a $3,400 token = a $68 window. Hitting it earns the maximum sharpness multiplier.*
+*A sub-2% range on a $3,400 token = a $68 window. The sharpness filter also acts as whale protection — a large stake on a wide range earns only a 0.1× multiplier, limiting its influence on the kernel.*
 
 ---
 
@@ -37,8 +45,7 @@ Let $$\delta = t_{resolution} - t_{now}$$:
 
 | Lead time $$\delta$$ | $$Q_L$$ multiplier |
 |---|---|
-| < 1 hour | 0.1× |
-| 1 – 2 hours | 0.1× |
+| < 2 hours | 0.1× |
 | 2 – 8 hours | 0.3× |
 | 8 hours – 1 day | 0.5× |
 | 1 – 2 days | 1.0× |
@@ -47,10 +54,12 @@ Let $$\delta = t_{resolution} - t_{now}$$:
 
 ---
 
-## **Combined Quality**
+## **Combined Quality and Weighted Dilution**
 
 $$\text{Quality}_{bps} = \frac{Q_S \times Q_L}{10{,}000}$$
 
-**Example:** Sharp range (2×) + 5-day lead time (2×) → Quality = 4× → Weight = 4 × Stake
+**Example:** A $100 stake with a sharp range (2×) and 5-day lead time (2×) → Quality = 4× → $$a_u = 400$$
 
-The multipliers are applied together — *a wide range cannot be rescued by an early placement, and a last-minute bet cannot be rescued by a tight range.*
+A whale staking $10,000 on a wide range (0.1×) with 1-hour lead time (0.1×) → Quality = 0.01× → $$a_u = 100$$
+
+*The $100 sharp stake commands 4× more kernel influence than the $10,000 whale stake. This is weighted dilution — precision beats capital.*

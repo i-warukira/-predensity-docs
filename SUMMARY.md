@@ -1,6 +1,7 @@
 # Table of Contents
 
 * [Abstract](README.md)
+* [Why WKP/DPM](docs/abstract.md)
 * [The Problem](docs/problem.md)
 * [The Solution](docs/solution.md)
 * [How a Prediction Works](docs/how-it-works.md)

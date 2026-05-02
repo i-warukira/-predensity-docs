@@ -1,11 +1,13 @@
 # Competitive Landscape
 
-| | **Predensity** | Polymarket | Perpetual Futures |
+| | **Predensity (WKP/DPM)** | AMM Binary Markets | Perpetual Futures |
 |---|---|---|---|
-| Market structure | Continuous range × time | Discrete binary events | Continuous price only |
+| Model | Weighted Kernel Parimutuel + DPM | AMM liquidity pools | Order book |
 | Bet format | Range $$[y_1, y_2]$$ at time $$x$$ | Yes / No tokens | Long / Short |
-| Liquidity | Parimutuel — winners split losers' stakes | AMM, requires LPs | Order book |
+| Reward driver | [Sharpness × Lead time](prediction-quality.md) | Fixed odds at trade | P&L on size |
+| Whale resistance | Sharpness filter caps $$a_u$$ regardless of stake | None — capital = influence | Partial |
+| Liquidity | Self-funded from losing stakes | Requires external LPs | Order book depth |
 | Resolution | Automatic oracle | Oracle, disputable | Mark price |
-| Reward driver | Sharpness × Lead time | Fixed odds at trade | P&L on size |
-| Early exit | *No — locked until resolution* | Yes | Yes |
-| Forecast output | Live bet distribution chart | Per-market probabilities | Funding rate |
+| Early exit | DPM virtual surplus (where available) | Yes — sell position | Yes — close anytime |
+| Forecast output | Live density surface $$p(x)$$ | Per-market probabilities | Funding rate |
+| Information value | High — precision is rewarded | Low — noise-tolerant | Medium |
