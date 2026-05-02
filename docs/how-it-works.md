@@ -5,7 +5,7 @@ A prediction has four inputs:
 | Input | Description | Example |
 |---|---|---|
 | Asset | What you're forecasting | ETH |
-| Range | Price interval $$[y_1, y_2]$$ | $3,500 – $3,700 |
+| Range | Price interval $$[y_1, y_2]$$ | $3,500 to $3,700 |
 | Time horizon | Resolution timestamp $$x$$ | 72 hours from now |
 | Stake | USDC committed | $100 |
 
@@ -17,4 +17,4 @@ At time $$x$$, the oracle checks the actual price $$p$$. If $$y_1 \leq p \leq y_
 
 The card shows a live breakdown of [sharpness, lead time](prediction-quality.md), combined quality, estimated fee, and estimated profit *before* you confirm the bet.
 
-> *The stake is locked until resolution. [There are no early exits](no-early-exits.md) — unless DPM exit liquidity is available.*
+> *The stake is locked until resolution. [There are no early exits](no-early-exits.md), unless DPM exit liquidity is available.*

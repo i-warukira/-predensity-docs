@@ -16,25 +16,25 @@ Bucket total stake: **1,000 USDC**. Three winning bets:
 
 | Bet | Stake | Quality | $$a_u$$ |
 |---|---|---|---|
-| A | 100 USDC | 2.0× | 200 |
-| B | 100 USDC | 1.0× | 100 |
-| C | 50 USDC | 4.0× | 200 |
+| A | 100 USDC | 2.0x | 200 |
+| B | 100 USDC | 1.0x | 100 |
+| C | 50 USDC | 4.0x | 200 |
 
 Total winning weight = 500
 
 | Bet | Payout |
 |---|---|
-| A | (200 / 500) × 1,000 = **400 USDC** |
-| B | (100 / 500) × 1,000 = **200 USDC** |
-| C | (200 / 500) × 1,000 = **400 USDC** |
+| A | (200 / 500) x 1,000 = **400 USDC** |
+| B | (100 / 500) x 1,000 = **200 USDC** |
+| C | (200 / 500) x 1,000 = **400 USDC** |
 
-*Bet C staked half of A but matched A's payout — because [quality](prediction-quality.md) doubled its kernel weight.*
+*Bet C staked half of A but matched A's payout, because [quality](prediction-quality.md) doubled its kernel weight.*
 
 ---
 
 ## **Whale resistance**
 
-A whale staking large capital on a wide range earns a 0.1× [sharpness multiplier](prediction-quality.md) — limiting $$a_u$$ regardless of stake size. To move the virtual price of a sharp kernel, a whale must be equally precise. If they aren't, they are simply providing exit liquidity for the sharp stakers they are trying to displace. This is the **manipulation tax**.
+A whale staking large capital on a wide range earns a 0.1x [sharpness multiplier](prediction-quality.md), limiting $$a_u$$ regardless of stake size. To move the virtual price of a sharp kernel, a whale must be equally precise. If they aren't, they are simply providing exit liquidity for the sharp stakers they are trying to displace. This is the **manipulation tax**.
 
 ---
 
