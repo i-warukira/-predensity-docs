@@ -1,6 +1,6 @@
 # No Early Exits
 
-In a pure WKP model, liquidity is locked in the kernel until the market resolves. Predensity layers a **Dynamic Parimutuel (DPM)** cost function, from Microsoft Research (2004), over the WKP pool to introduce exit liquidity without the predatory mechanics of an AMM.
+In a pure WKP model, liquidity is locked in the kernel until the market resolves. Predensity layers a **[Dynamic Parimutuel (DPM)](https://www.microsoft.com/en-us/research/video/a-dynamic-pari-mutuel-market-for-hedging-wagering-and-information-aggregation/)** cost function, from Microsoft Research (2004), over the WKP pool to introduce exit liquidity without the predatory mechanics of an AMM.
 
 ---
 

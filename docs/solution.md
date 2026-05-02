@@ -12,4 +12,4 @@ $$\text{Win} = \begin{cases} \text{true} & \text{if } y_1 \leq p \leq y_2 \\ \te
 
 No market creation. No liquidity bootstrapping. No manual resolution.
 
-Layered on top of WKP is a **Dynamic Parimutuel (DPM)** cost function, drawn from Microsoft Research (2004), which introduces exit liquidity into the kernel space. See [Payouts](payouts.md) for how this works.
+Layered on top of WKP is a **[Dynamic Parimutuel (DPM)](https://www.microsoft.com/en-us/research/video/a-dynamic-pari-mutuel-market-for-hedging-wagering-and-information-aggregation/)** cost function, drawn from Microsoft Research (2004), which introduces exit liquidity into the kernel space. See [Payouts](payouts.md) for how this works.
