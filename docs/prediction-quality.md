@@ -1,35 +1,62 @@
-# What Makes a Prediction High Quality
+# Prediction Quality
 
-Every prediction on Predensity is scored on three dimensions the moment it's placed. These scores are locked in — they don't change after the fact.
+Every bet is scored on three dimensions at placement. Scores are *locked in* — they do not change after the fact.
 
----
+$$\text{Prediction Quality} = S \times Q_L^{w_L} \times Q_B^{w_B} \times Q_S^{w_S}$$
 
-## Sharpness
+Initial weights: $$w_L = w_B = w_S = \tfrac{1}{3}$$. Scaling factor $$S = 1$$ at launch.
 
-Sharpness is about precision. A range of $3,500–$3,600 on a $3,400 token is a 3% window. A range of $2,000–$5,000 is a 90% window. The narrower your range, the harder it is to hit, and the more you earn if you do.
-
-> Sharpness rewards conviction.
+Exponential weighting means *no single dimension can compensate for weakness in another*. A great prediction must be sharp, bold, and early — all at once.
 
 ---
 
-## Boldness
+## **Sharpness** $$Q_S$$
 
-Boldness is about independence. At any given moment, the platform has a live probability map built from all active bets. If most of the money is clustered around $3,400–$3,500 and you're calling $3,700–$3,800, your prediction is bold — it diverges from the consensus. Bold predictions that land earn significantly more than ones that follow the crowd.
+*How narrow is the predicted range relative to the current price?*
 
-> Boldness rewards original thinking.
+$$Q_S = 1 - e^{-\frac{y_2 - y_1}{p_0 \cdot k}}, \quad k = 0.25$$
+
+| Range / Price | $$Q_S$$ |
+|---|---|
+| 5% | 0.993 |
+| 10% | 0.950 |
+| 25% | 0.630 |
+| 50% | 0.390 |
+| 100% | 0.220 |
+
+A 5% window on a $3,400 token = $170 range. Hitting it is hard. The system pays accordingly.
 
 ---
 
-## Lead Time
+## **Boldness** $$Q_B$$
 
-Lead time is about timing. Predicting where ETH will be in three days is harder than predicting where it will be in three hours. The earlier you commit, the more you earn if you're right.
+*How far does the prediction deviate from current market consensus?*
 
-> Lead time rewards foresight.
+$$Q_B = 1 - \text{LocalConfidence}_{[y_1, y_2]}(x)$$
+
+Where local confidence is the share of probability mass the current market assigns to $$[y_1, y_2]$$ at time $$x$$:
+
+$$\text{LocalConfidence}(x) = \frac{\int_{y_1}^{y_2} P(x,y)\, dy}{\int_{-\infty}^{\infty} P(x,y)\, dy}$$
+
+$$P(x,y)$$ is the live probability surface built from all active bets (see [Probability Map](probability-map.md)).
+
+- Prediction follows the crowd → $$Q_B \approx 0$$
+- Prediction goes against the crowd → $$Q_B \approx 1$$
 
 ---
 
-## How They Combine
+## **Lead Time** $$Q_L$$
 
-These three scores are combined into a single **Prediction Quality** multiplier using exponential weighting. The reason for exponential rather than additive weighting is deliberate: a great prediction has to be strong across all three dimensions.
+*How far in advance was the prediction placed?*
 
-You can't make up for a very wide range by placing the bet early. You can't make up for following the crowd by being extremely precise. The system is designed to reward predictions that are genuinely hard to make — sharp, bold, and early all at once.
+$$Q_L = a \cdot t^{b}, \quad a = 17.78,\ b = 0.25$$
+
+Where $$t$$ is lead time in hours. Accepted range: $$t \in [1, 1000]$$.
+
+| Lead Time | $$Q_L$$ |
+|---|---|
+| 1 hour | 17.8 |
+| 1 day | 39.4 |
+| 3 days | 51.8 |
+| 1 week | 64.0 |
+| 1 month | 92.1 |

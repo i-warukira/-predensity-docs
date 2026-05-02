@@ -1,9 +1,7 @@
 # Abstract
 
-Most people who trade crypto have a view. They watch the charts, follow the news, read the threads — and they form an opinion about where a token is going. But there has never been a clean way to express that opinion, get rewarded for being right, and contribute something useful to the broader market in the process.
+Predensity is a decentralized prediction market that rewards *boldness*, *precision*, and *foresight* — not just correctness.
 
-Predensity changes that.
+Traders pick a price range and a time horizon, stake USDC, and earn based on how hard their prediction was to make. Every bet feeds a live **probability map** — a crowd-sourced forecast surface that is free to read and useful to everyone.
 
-Predensity is a decentralized prediction market, live on Hedera, where anyone can forecast the future price of a crypto token — or the outcome of a sports match, a political event, a financial metric — and earn real rewards for being bold, early, and accurate. Not just correct. The system specifically rewards people who go against the grain, commit early, and pin down a precise range. That combination of traits is what makes a prediction genuinely valuable, and Predensity is built to recognize and reward it.
-
-The platform starts with crypto price forecasting and expands from there. Every prediction placed feeds into a shared, live probability map — a crowd-sourced picture of where the market thinks things are heading. That map is a public good. Anyone can read it. The more people participate, the more useful it becomes.
+The system starts with crypto price forecasting and expands to sports, politics, finance, and technology. The mechanics are the same across all categories: *predict a range, commit a stake, get rewarded for quality*.

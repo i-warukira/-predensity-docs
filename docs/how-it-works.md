@@ -1,19 +1,18 @@
 # How a Prediction Works
 
-When you place a prediction on Predensity, you specify four things:
+A prediction has four inputs:
 
-**What you're predicting.**
-A crypto token, a sports match outcome, a political result, a financial metric. The platform currently supports crypto price markets and is expanding to sports, politics, finance, and technology.
+| Input | Description | Example |
+|---|---|---|
+| Asset | What you're forecasting | ETH |
+| Range | Price interval $$[y_1, y_2]$$ | $3,500 – $3,700 |
+| Time horizon | Resolution timestamp $$x$$ | 72 hours from now |
+| Stake | USDC committed | $100 |
 
-**Your range.**
-For crypto, this is a price interval — say, $3,500 to $3,700. For other categories, it's the equivalent measurable range for that outcome type.
+At time $$x$$, the oracle checks the actual price $$p$$:
 
-**Your time horizon.**
-When should the prediction resolve? You can predict anywhere from one hour to over a month out. The further out you go, the harder it is — and the more you can earn.
+$$\text{Win} = \begin{cases} \text{true} & \text{if } y_1 \leq p \leq y_2 \\ \text{false} & \text{otherwise} \end{cases}$$
 
-**Your stake.**
-How much USDC you're putting behind the prediction.
+If the bet wins, payout is calculated from the **Prediction Quality** score locked in at placement time.
 
----
-
-At resolution time, the oracle fetches the actual value. If it falls within your range, you win. Your payout is your stake back, plus a reward calculated from your Prediction Quality score.
+> *The stake is locked until resolution. There are no early exits.*

@@ -1,19 +1,20 @@
 # The Probability Map
 
-Every active bet on Predensity feeds into a live, continuously updated probability distribution. Think of it as a heat map stretched across two axes: price on one side, time on the other. The darker the region, the more stake-weighted confidence the market has placed there.
+Every active bet contributes to a live 2D probability surface $$P(x, y)$$ — price $$y$$ on one axis, time $$x$$ on the other.
+
+$$P(x,y) = \frac{1}{Z} \sum_{i=1}^{n} w_i \cdot K(x - x_i,\ y - y_i)$$
+
+Where $$K()$$ is a 2D Gaussian kernel, $$Z$$ is a normalization constant, and each bet's weight decays over time:
+
+$$w_i = s_i \cdot e^{-r_i \cdot t_i}$$
+
+$$s_i$$ = stake, $$r_i$$ = decay rate, $$t_i$$ = days since placement.
+
+*Older bets lose influence. The map reflects current market thinking, not a historical average.*
 
 ---
 
-## Two Purposes
+**The map serves two roles:**
 
-**First, it's the basis for calculating boldness.**
-When you place a prediction, the system looks at where your range sits on the current map. If you're predicting into a low-confidence region — somewhere the crowd hasn't gone — your boldness score is high. If you're predicting exactly where everyone else is, your boldness score is low.
-
-**Second, it's a public good.**
-The map is free to read. Traders can use it to understand where market sentiment is concentrated. Researchers can use it to study how crowd forecasts evolve over time. Bots can consume it as a real-time signal. The more people participate in Predensity, the more accurate and useful the map becomes — which in turn attracts more participants. It's a self-reinforcing loop.
-
----
-
-## Staying Current
-
-The map applies decay weighting to older bets, so it stays responsive to new information. A prediction placed a week ago carries less weight than one placed an hour ago. The map reflects the current state of market thinking, not a historical average.
+1. **Boldness input** — a bet landing in a low-density region of $$P(x,y)$$ scores high on $$Q_B$$
+2. **Public signal** — free to read; useful for traders, researchers, and bots tracking sentiment
